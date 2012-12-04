@@ -38,16 +38,16 @@ define mounts::virtual {
       # Define mount
       mount { $name:
         ensure   => present, # change later - allow to be passed
-	device   => $device,
-	name     => $mount_point,
-	fstype   => $fstype,
-	options  => $options,
-	remounts => true,
+        device   => $device,
+        name     => $mount_point,
+        fstype   => $fstype,
+        options  => $options,
+        remounts => true,
       }
     } else {
-      notify{ "$name is not a key to a hash":}
+      notify{ "${name} is not a key to a hash":}
     }
   } else {
-    notify{"$name is not a string":}
+    notify{"${name} is not a string":}
   }
 }

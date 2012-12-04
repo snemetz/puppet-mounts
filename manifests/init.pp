@@ -18,7 +18,7 @@ class mounts {
     # Create virtual mount definitions
     @mounts::virtual { $mount_keys:; }
   } else {
-    notify { "MOUNTS not array of hash keys $mount_keys --- $mount_defs": }
+    notify { "MOUNTS not array of hash keys ${mount_keys} --- ${mount_defs}": }
   }
   # Realize the default mounts list
   #mounts::list{'default':}

@@ -10,4 +10,4 @@ define mounts::list {
   } else {
     mounts::real { $name:; }
   }
-} 
+}
