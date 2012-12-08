@@ -34,10 +34,11 @@ define mounts::virtual {
         $options = $mounts::options
       }
       # Ensure mount point if not mounted
-      exec { 'mk_mnt_pt':
+      exec { "mk_mnt_pt_${name}":
         path    => ['/bin'],
         unless  => "/bin/mountpoint -q ${mount_point}",
         command => "mkdir -p ${mount_point}; chmod 0000 ${mount_point}",
+        before  => Mount[$name],
       }
 
       # Define mount
@@ -48,7 +49,6 @@ define mounts::virtual {
         fstype   => $fstype,
         options  => $options,
         remounts => true,
-        requires => Exec['mk_mnt_pt'],
       }
     } else {
       notify{ "${name} is not a key to a hash":}
