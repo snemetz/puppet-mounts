@@ -37,9 +37,9 @@ define mounts::virtual {
       exec { 'mk_mnt_pt':
         path    => ['/bin'],
         unless  => "/bin/mountpoint -q ${mount_point}",
-        command => "mkdir -p ${mount_point}; chmod 0000 ${mount_point}"
+        command => "mkdir -p ${mount_point}; chmod 0000 ${mount_point}",
       }
-      
+
       # Define mount
       mount { $name:
         ensure   => present, # change later - allow to be passed
