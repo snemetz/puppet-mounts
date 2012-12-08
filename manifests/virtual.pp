@@ -23,6 +23,11 @@ define mounts::virtual {
       } else {
         fail('ERROR: mount path is required')
       }
+      if $mounts::mount_defs[$name]['ensure'] != '' {
+        $ensure = $mounts::mount_defs[$name]['ensure']
+      } else {
+        $ensure = $mounts::ensure
+      }
       if $mounts::mount_defs[$name]['fstype'] != '' {
         $fstype = $mounts::mount_defs[$name]['fstype']
       } else {
@@ -43,7 +48,7 @@ define mounts::virtual {
 
       # Define mount
       mount { $name:
-        ensure   => present, # change later - allow to be passed
+        ensure   => $ensure,
         device   => $device,
         name     => $mount_point,
         fstype   => $fstype,

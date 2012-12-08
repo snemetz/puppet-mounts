@@ -12,9 +12,10 @@ class mounts {
   $mount_keys = keys($mount_defs)
   if is_array($mount_keys) {
     # Defaults
-    $share_host = hiera('mounts_share_host')
-    $options    = hiera('mounts_options')
-    $fstype     = hiera('mounts_fstype')
+    $share_host = hiera('mounts_share_host', '')
+    $options    = hiera('mounts_options', $mounts::params::options)
+    $fstype     = hiera('mounts_fstype', $mounts::params::fstype)
+    $ensure     = hiera('mounts_ensure', $mounts::params::ensure)
     # Create virtual mount definitions
     @mounts::virtual { $mount_keys:; }
   } else {
