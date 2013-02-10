@@ -1,0 +1,39 @@
+---
+
+# Set defaults
+
+# Put in location / env files
+#mounts_share_host: LocalNAS
+mounts_options   : rw,bg,vers=3,tcp,timeo=600,retrans=2,hard,intr,rsize=32768,wsize=32768
+mounts_fstype    : nfs
+mounts_ensure    : defined
+
+mounts_list_app1:
+  - app1_data
+  - app1_data2
+  - app1_data3
+
+#mounts_name:
+#  share_host:
+#  share_path:
+#  mount_path:
+#  fstype:
+#  options:
+#  ensure:
+
+mounts_defs:
+  app1_data:
+    share_path: /vol/app1_data
+    mount_path: /mnt/app1_data
+  app1_data2:
+    share_path: /ifs/data/app1_data2
+    mount_path: /mnt/app1_data2
+    ensure    : mounted
+    fstype    : nfs
+    options   : rw,rsize=8192,wsize=8192,timeo=14,intr
+  app1_data3:
+    share_path: /ifs/data/app1_data3
+    mount_path: /mnt/app1_data3
+    fstype    : nfs
+    ensure    : mounted
+    share_host: specific_nas
